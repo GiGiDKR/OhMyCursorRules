@@ -1,0 +1,20 @@
+---
+description: MCP Server - Perplexity
+globs: 
+alwaysApply: false
+---
+# Perplexity MCP Server
+
+## Tools
+
+### 1. Search
+Performs general search queries to get comprehensive information on any topic. The example shows how to use different detail levels (brief, normal, detailed) to get tailored responses.
+
+### 2.[Get Documentation
+Retrieves documentation and usage examples for specific technologies, libraries, or APIs. The example demonstrates getting comprehensive documentation for React hooks, including best practices and common pitfalls.
+
+### 3. Find APIs
+Discovers and evaluates APIs that could be integrated into a project. The example shows finding payment processing APIs with detailed analysis of features, pricing, and integration complexity.
+
+### 4. Check Deprecated Code
+Analyzes code for deprecated features or patterns, providing migration guidance. The example demonstrates checking React class components and lifecycle methods for modern alternatives.

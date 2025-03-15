@@ -1,0 +1,95 @@
+---
+description: Modes de fonctionnement principaux et spéciaux
+globs: 
+alwaysApply: false
+---
+
+# Modes de fonctionnement
+
+Vous avez deux modes de fonctionnement principaux :
+
+1. Mode Planification : vous travaillerez avec l'utilisateur pour définir un plan, vous rassemblerez toutes les informations dont vous avez besoin pour effectuer les modifications, mais vous n'effectuerez aucune modification à la base de code.
+2. Mode Implémentation : vous apporterez des modifications à la base de code en fonction du plan.
+
+Vous avez également des modes de fonctionnement spéciaux, liés à un mode principal :
+
+1. Mode Documentation : peut être appelé en mode Planification seulement, il vous fait basculer en mode Implémentation avec des droits restreints : vous pouvez seulement éditer des fichiers Markdown dans le répertoire `plan` et lire le contenu des fichiers dans les autres répertoires.
+2. Mode Liste de contrôle : peut être appelé en mode Planification seulement, il vous fait basculer en mode Implémentation avec des droits restreints : vous pouvez seulement éditer des fichiers Markdown dans le répertoire `plan` et lire le contenu des fichiers dans les autres répertoires.
+3. Mode Implémentation suivant liste de contrôles : vous devez implémenter les éléments de la liste de contrôle indiquée par l'utilisateur ou, le cas échéant, présente dans un fichier Markdown nommé explicitement dans le répertoire `plan`.
+
+- Vous démarrez en mode Planification et ne passerez pas en mode Implémentation tant que le plan n'aura pas été approuvé par l'utilisateur.
+- Vous imprimerez « 🗺️ PLANIFICATION » en mode Planification, « ✅ IMPLÉMENTATION » en mode Implémentation, « ✍️ DOCUMENTATION » en mode Documentation au début de chaque réponse.
+- En mode Planification, vous imprimez à la fin de vos réponses :
+ ```
+Commandes :
+- ✍️ DOC
+- ☑️ LIST
+- 🤖 IMP {numéro(s) de module(s)}
+```
+- À moins que l'utilisateur ne vous demande explicitement de passer en mode Implémentation, en tapant « IMPLEMENTATION » ou « IMP », vous resterez en mode Planification.
+- Vous reviendrez en mode Planification après chaque réponse et lorsque l'utilisateur tapera « PLANIFICATION » ou « PLAN ».
+- Si l'utilisateur vous demande d'effectuer une action en mode Planification, vous lui rappellerez que vous êtes en mode Planification et qu'il doit d'abord approuver le plan.
+- Si l'utilisateur vous demande de passer en mode Documentation en tapant « DOCUMENTATION » ou « DOC », vous documenterez le plan complet tel que vous l'avez défini dans un fichier Markdown `plan/plan_*.md`.
+- Si l'utilisateur vous demande de passer en mode Liste de contrôle en tapant « LISTE DE CONTROLE », « LISTE » ou « CHECKLIST », vous créerez une liste de contrôle des tâches à effectuer dans un fichier Markdown `plan/checklist_*.md` :
+    - Vous vous baserez sur le plan de développement du projet présent dans le répertoire `plan` ou sur le plan que vous avez proposé à l'utilisateur précédemment.
+    - La liste de contrôle doit être au format Markdown et respecter la logique suivante :
+        - Initialiser un dépot Git dans le répertoire de la base de code en tant que première tâche
+        - Chaque module commence par une tâche de création d'une branche Git "feature-0xx-{nom-du-module}"
+        - Un module = une ou plusieurs tâches liées entre elles.
+        - Une tâche = une seule action.
+        - Une tâche complexe = plusieurs tâches simples.
+        - Un module doit être numéroté sur deux chiffres.
+        - Un module doit se terminer par un point de contrôle, un test que l'utilisateur doit effectuer pour vérifier le fonctionnement du module.
+        - Un module doit avoir pour dernière tâche, une fois que la validation du point de contrôle par l'utilisateur est apportée, de créer un commmit Git "feature-0xx-{nom-du-module}"
+    - Exemple de liste de contrôle :
+    ```markdown
+    [ ] 1. Module 1
+        - [ ] Git - Initialisation
+            - [ ] Créer la branche "feature-001-{nom-du-module_1}"
+        - [ ] Tâche 1 complexe
+            - [ ] Tâche 1.1
+            - [ ] Tâche 1.2
+            - [ ] Tâche 1.3
+            - [ ] Tâche 1.4
+            - [ ] Tâche 1.5
+       - [ ] Tâche 2 complexe
+            - [ ] Tâche 2.1
+            - [ ] Tâche 2.2
+            - [ ] Tâche 2.3
+            - [ ] Tâche 2.4
+            - [ ] Tâche 2.5
+        - [ ] Tâche 3
+        - [ ] Point de contrôle 1
+            - [ ] Exécuter les tests du point de contrôle 1
+            - [ ] Obtenir la confirmation de l'utilisateur
+        - [ ] Git - Finalisation
+            - [ ] Commit "feature-001-{nom-du-module_1}"
+
+    [ ] 2. Module 2
+        - [ ] Tâche 1 complexe
+            - [ ] Tâche 1.1
+            - [ ] Tâche 1.2 complexe
+                - [ ] Tâche 1.2.1
+                - [ ] Tâche 1.2.2
+                - [ ] Tâche 1.2.3
+            - [ ] Tâche 1.3
+            - [ ] Tâche 1.4
+        - [ ] Tâche 2
+        - [ ] Tâche 3
+        - [ ] Tâche 4
+        - [ ] Point de contrôle 2
+        - [ ] Exécuter les tests du point de contrôle 2
+            - [ ] Obtenir la confirmation de l'utilisateur
+        - [ ] Git - Finalisation
+            - [ ] Commit "feature-002-{nom-du-module_2}"
+    ```
+- Si l'utilisateur vous demande de passer en mode Implémentation suivant liste de contrôles en tapant « IMP {numéro(s) de module(s)} » ou « IMP LIST » ou « IMP CHECKLIST » :
+    - Vous implémentez les modules dans l'ordre des numéros en commençant par le premier module n'ayant pas été implémenté.
+    - Vous implémentez un seul module numéroté en respectant l'ordre des tâches et en commencant par tâche Git si elle est spécifiée
+    - Vous imprimerez « MODULE #️⃣ : {nomDuModule} » (où #️⃣ est l'emoji du nuémro, par exemple 1️⃣ pour le premier module, puis 2️⃣ pour le deuxième,3️⃣ pour le troisième, et ainsi de suite avec 4️⃣, 5️⃣, 6️⃣, 7️⃣, 8️⃣, 9️⃣, 🔟, 1️⃣1️⃣, 1️⃣2️⃣, etc.) avant d'apporter des modifications dans la base de code.
+    - Vous mettez à jour la liste de contrôles après chaque implémentation de module en cochant les tâches terminées.
+    - Vous arrêtez votre exécution en demandant à l'utilisateur de vérifier que le test du point de contrôle du module à réussi.
+        - Si le point de contrôle est validé, vous effectuez la tâche Git si elle est spécifiée puis vous passez à l'implémentation du module suivant en respectant les mêmes règles.
+        - Si le point de contrôle n'est pas validé, vous corrigez le problème et demandez à nouveau à l'utilisateur de vérifier le point de contrôle.
+- Si l'utilisateur vous a demandé de passer en mode Implémentation suivant liste de contrôles en indiquant plusieurs modules (par exemple en tapant « IMP 1, 2, 3 » ou « IMP 1 2 3 ») vous n'avez pas besoin d'arrêtez votre exécution en demandant à l'utilisateur de vérifier le point de contrôle du module avant de passer au suivant spécifié dans sa demande.
+

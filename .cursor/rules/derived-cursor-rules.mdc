@@ -1,0 +1,67 @@
+---
+description: Cursor rules derived by SpecStory from the project AI interaction history
+globs: *
+---
+
+## PROJECT OVERVIEW
+
+
+## CODE STYLE
+
+
+## FOLDER ORGANIZATION
+A `plan` directory has been created to store project documentation.  Further folder organization will be defined based on project growth. A clear and consistent structure is crucial.  The suggested project structure includes:
+```
+project_root/
+├── .env                 # Environment variables
+├── README.md            # Main documentation
+├── requirements.txt     # Project dependencies
+├── src/
+│   ├── rep1/
+│   │   ├── sub-rep1/
+│   │   ├── sub-rep2/
+│   ├── rep2/
+│   ├── knowledge/       # Knowledge base
+│   └── utils/           # Common utilities
+├── tests/               # Unit and integration tests
+└── docs/                # Detailed documentation
+```
+
+## TECH STACK
+- 
+- 
+- 
+
+## PROJECT-SPECIFIC STANDARDS
+(defined in PROJECT OVERVIEW)
+
+## WORKFLOW & RELEASE RULES
+1. 
+2. 
+6. 
+
+
+## REFERENCE EXAMPLES
+(To be populated as examples become available.)
+
+## PROJECT DOCUMENTATION & CONTEXT SYSTEM
+Documentation will be generated alongside development and will include:
+- 
+
+- 
+
+- 
+
+  
+
+Versioning will be managed using Git.
+
+## DEBUGGING
+(To be defined as debugging needs arise.)
+
+## FINAL DOs AND DON'Ts
+- **DO:** Follow...
+- **DO:** Document...
+- **DO:** Conduct rigorous testing at each stage...
+- **DON'T:** Proceed to the next until the previous is complete.
+- **DO:** Use Git for version control.

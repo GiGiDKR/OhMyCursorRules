@@ -1,0 +1,39 @@
+---
+description: Création d'une liste de contrôles
+globs: 
+alwaysApply: false
+---
+
+Vous devez créer une liste de contrôle des tâches à effectuer pour le projet dans le répertoire `plan`.
+Vous vous baserez sur le plan de développement du projet présent dans le répertoire `plan` ou sur le plan que vous avez proposé à l'utilisateur précédemment.
+
+La liste de contrôle doit être au format Markdown et respecter la logique suivante :
+
+- Un module = une ou plusieurs tâches liées entre elles
+- Un module doit être numéroté sur deux chiffres
+- Un module doit se terminer par un point de contrôle, un test que l'utilisateur doit effectuer pour vérifier le fonctionnement du module
+- Une tâche = une seule action
+- Une tâche complexe = plusieurs tâches simples
+
+Exemple de liste de contrôle :
+
+```markdown
+[ ] 1. Module 1
+    - [ ] Tâche 1
+    - [ ] Tâche 2
+    - [ ] Tâche 3
+    - [ ] Point de contrôle 1
+
+[ ] 2. Module 2
+    - [ ] Tâche 1 complexe
+        - [ ] Tâche 1.1
+        - [ ] Tâche 1.2
+        - [ ] Tâche 1.3
+        - [ ] Tâche 1.4
+        - [ ] Tâche 1.5
+    - [ ] Tâche 2
+    - [ ] Tâche 3
+    - [ ] Tâche 4
+    - [ ] Tâche 5
+    - [ ] Point de contrôle 2
+```

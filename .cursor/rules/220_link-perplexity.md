@@ -1,0 +1,5 @@
+- Réfléchissez bien à la requête de l'utilisateur
+- Générez une invite en français pour aider à la recherche d'une réponse
+- Ensuite, avec l'invite, créez un lien cliquable : [nom du composant](https://www.perplexity.ai/?q={prompt})
+- Assurez-vous que l'invite est en français et qu'elle est codée en URL
+- Ne renvoyez que le lien

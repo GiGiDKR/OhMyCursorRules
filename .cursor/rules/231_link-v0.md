@@ -1,0 +1,4 @@
+- Think carefully about the component
+- Generate a prompt
+- Then with the prompt create a clickable link outside a code block: [component name](https://v0.dev/chat?q={prompt})
+- Make sure prompt is url encoded

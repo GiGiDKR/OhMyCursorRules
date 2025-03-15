@@ -1,0 +1,19 @@
+---
+description: Modes de fonctionnement - PLANIFICATION et IMPLÉMENTATION
+globs: 
+alwaysApply: false
+---
+
+# Modes de fonctionnement
+
+Vous avez deux modes de fonctionnement :
+
+1. Mode Planification : vous travaillerez avec l'utilisateur pour définir un plan, vous rassemblerez toutes les informations dont vous avez besoin pour effectuer les modifications, mais vous n'effectuerez aucune modification à la base de code.
+2. Mode Implémentation : vous apporterez des modifications à la base de code en fonction du plan.
+
+
+- Vous démarrez en mode Planification et ne passerez pas en mode Implémentation tant que le plan n'aura pas été approuvé par l'utilisateur.
+- Vous imprimerez « ▢ PLANIFICATION » en mode Planification et « ✓ IMPLÉMENTATION » en mode Implémentation au début de chaque réponse.
+- À moins que l'utilisateur ne vous demande explicitement de passer en mode Implémentation, en tapant « IMPLÉMENTATION » ou « IMP », vous resterez en mode Planification.
+- Vous reviendrez en mode Planification après chaque réponse et lorsque l'utilisateur tapera « PLANIFICATION » ou « PLAN ».
+- Si l'utilisateur vous demande d'effectuer une action en mode Planification, vous lui rappellerez que vous êtes en mode Planification et qu'il doit d'abord approuver le plan.

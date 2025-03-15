@@ -1,0 +1,121 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+description: Règles et bonnes pratiques pour la gestion de projets Python avec uv (gestionnaire de paquets rapide et moderne
+globs: **/*.py, **/pyproject.toml, **/uv.lock,uv.lock,pyproject.toml,*.py
+alwaysApply: false
+---
+
+# Gestion de projets Python avec uv
+
+@context {
+  "type": "documentation",
+  "purpose": "project_management",
+  "tool": "uv",
+  "version": "1.0.0"
+}
+
+## Initialisation de projet
+
+@commands {
+  "création": "uv init [nom-du-projet]",
+  "initialisation_dossier_courant": "uv init",
+  "structure_créée": [
+    ".python-version",
+    "README.md",
+    "main.py", 
+    "pyproject.toml"
+  ]
+}
+
+Le fichier `pyproject.toml` est le fichier central qui définit les métadonnées et dépendances du projet.
+
+## Gestion des dépendances
+
+@commands {
+  "ajouter": "uv add [paquet]",
+  "ajouter_avec_version": "uv add 'paquet==version'",
+  "ajouter_depuis_git": "uv add git+https://github.com/org/repo",
+  "supprimer": "uv remove [paquet]",
+  "verrouiller": "uv lock",
+  "mettre_à_jour_paquet": "uv lock --upgrade-package [paquet]",
+  "mettre_à_jour_tout": "uv lock --upgrade"
+}
+
+## Synchronisation et exécution
+
+@commands {
+  "synchroniser_env": "uv sync",
+  "exécuter_script": "uv run [script.py]",
+  "exécuter_commande": "uv run -- [commande]",
+  "exemple_flask": "uv run -- flask run -p 3000"
+}
+
+uv vérifie automatiquement que le fichier de verrouillage est à jour et que l'environnement est synchronisé avant chaque exécution de `uv run`.
+
+## Environnements virtuels
+
+@commands {
+  "créer_venv": "uv venv [chemin]",
+  "créer_venv_défaut": "uv venv"
+}
+
+Par défaut, uv crée un environnement virtuel nommé `.venv` dans le répertoire courant.
+
+## Outils et utilitaires
+
+@commands {
+  "exécuter_outil": "uv tool run [outil]",
+  "raccourci_exécuter_outil": "uvx [outil]",
+  "installer_outil": "uv tool install [outil]"
+}
+
+## Construction et publication
+
+@commands {
+  "construire_tous": "uv build",
+  "construire_sdist": "uv build --sdist",
+  "construire_wheel": "uv build --wheel"
+}
+
+## Workflow recommandé
+
+@workflow {
+  "nouveau_projet": [
+    "uv init mon-projet",
+    "cd mon-projet"
+  ],
+  "développement": [
+    "uv add [dépendances]",
+    "uv run [script.py]",
+    "uv lock --upgrade (périodiquement)"
+  ],
+  "publication": [
+    "uv build",
+    "twine upload dist/*"
+  ]
+}
+
+## Bonnes pratiques
+
+@best_practices [
+  {
+    "id": "dépendances_explicites",
+    "description": "Toujours spécifier les dépendances dans pyproject.toml"
+  },
+  {
+    "id": "verrouillage",
+    "description": "Versionner le fichier uv.lock pour garantir des environnements cohérents"
+  },
+  {
+    "id": "utiliser_run",
+    "description": "Privilégier uv run pour exécuter les scripts afin de garantir la synchronisation"
+  },
+  {
+    "id": "pas_activation",
+    "description": "Avec uv, il n'est pas nécessaire d'activer l'environnement virtuel"
+  }
+]

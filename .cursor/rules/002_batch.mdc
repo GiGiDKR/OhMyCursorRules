@@ -1,0 +1,189 @@
+---
+description: Règles et bonnes pratiques pour Batch
+globs: 
+alwaysApply: false
+---
+---
+description: Règles et bonnes pratiques pour Batch
+globs: *.bat,*.cmd
+alwaysApply: false
+---
+
+# Scripts Batch Windows (.cmd)
+
+@context {
+  "type": "documentation",
+  "purpose": "windows_scripting",
+  "tool": "Batch,
+  "version": "1.0.0"
+}
+
+## Syntaxe de base
+
+- Les fichiers .cmd sont des scripts d'automatisation pour Windows
+- Chaque ligne est une commande qui s'exécute séquentiellement
+- Les commandes ne sont pas sensibles à la casse
+- Les commentaires commencent par `REM` ou `::` (préférer `REM` pour la compatibilité)
+- L'extension .cmd est préférable à .bat sur les systèmes Windows modernes
+
+```batch
+@ECHO OFF
+REM Ceci est un commentaire
+:: Ceci est aussi un commentaire
+ECHO Bonjour le monde
+PAUSE
+```
+
+## Variables et paramètres
+
+- Variables d'environnement: `%VARNAME%`
+- Variables locales avec SET: `SET var=valeur`
+- Arguments passés au script: `%0` (nom du script), `%1`, `%2`, etc.
+- Tous les arguments: `%*`
+- Expansion de variables retardée: `!var!` (nécessite `SETLOCAL EnableDelayedExpansion`)
+
+```batch
+@ECHO OFF
+SET message=Bonjour
+ECHO %message% %1
+SETLOCAL EnableDelayedExpansion
+SET /A compteur=1
+SET /A compteur=!compteur!+1
+ECHO !compteur!
+```
+
+## Structures de contrôle
+
+**Conditions IF**
+
+```batch
+IF EXIST fichier.txt ECHO Le fichier existe
+IF NOT EXIST fichier.txt ECHO Le fichier n'existe pas
+IF "%1"=="valeur" (
+    ECHO Premier argument est "valeur"
+) ELSE (
+    ECHO Premier argument n'est pas "valeur"
+)
+```
+
+**Boucles FOR**
+
+```batch
+REM Boucle sur des fichiers
+FOR %%f IN (*.txt) DO ECHO %%f
+
+REM Boucle sur des valeurs
+FOR %%i IN (1 2 3) DO ECHO %%i
+
+REM Boucle avec compteur
+FOR /L %%i IN (1,1,10) DO ECHO %%i
+```
+
+**Sauts GOTO et labels**
+
+```batch
+@ECHO OFF
+GOTO :section
+
+:section
+ECHO Cette section s'exécute
+GOTO :EOF
+
+:autre_section
+ECHO Cette section ne s'exécute pas
+```
+
+## Bonnes pratiques
+
+- Toujours commencer les scripts par `@ECHO OFF` pour une sortie plus propre
+- Documenter le script avec des commentaires `REM`
+- Utiliser `SETLOCAL` pour isoler les variables et `ENDLOCAL` pour restaurer l'environnement
+- Terminer avec `EXIT /B [code]` pour retourner un code de sortie
+- Vérifier l'existence des fichiers avant de les manipuler avec `IF EXIST`
+- Gérer les erreurs avec `IF ERRORLEVEL`
+- Échapper les caractères spéciaux avec `^`
+- Utiliser `CALL` pour exécuter un autre script batch sans terminer le script actuel
+
+## Commandes courantes
+
+**Système de fichiers**
+
+```batch
+DIR            REM Liste les fichiers du répertoire
+CD /d D:\path  REM Change de répertoire (avec /d pour changer de lecteur)
+MKDIR dossier  REM Crée un dossier
+RMDIR /S /Q d  REM Supprime un dossier et son contenu
+COPY src dst   REM Copie un fichier
+XCOPY /E /I src dst  REM Copie des répertoires entiers
+MOVE src dst   REM Déplace un fichier
+DEL fichier    REM Supprime un fichier
+REN old new    REM Renomme un fichier
+TYPE fichier   REM Affiche le contenu d'un fichier
+```
+
+**Système et réseau**
+
+```batch
+SYSTEMINFO     REM Affiche les informations système
+TASKLIST       REM Liste les processus en cours
+TASKKILL /PID n REM Termine un processus
+IPCONFIG       REM Affiche la configuration réseau
+PING host      REM Teste la connectivité réseau
+NETSTAT        REM Affiche les connexions réseau
+SC query svc   REM Interroge l'état d'un service
+```
+
+**Entrée/Sortie**
+
+```batch
+ECHO message   REM Affiche un message
+PAUSE          REM Attend une frappe de touche
+TIMEOUT /T n   REM Attend n secondes
+SET /P var=    REM Demande une saisie utilisateur
+> fichier      REM Redirige la sortie vers un fichier
+>> fichier     REM Ajoute la sortie à un fichier
+< fichier      REM Utilise le fichier comme entrée
+| commande     REM Redirige la sortie vers une autre commande
+```
+
+## Exemples pratiques
+
+**Vérification d'erreurs**
+
+```batch
+@ECHO OFF
+SomeCommand
+IF ERRORLEVEL 1 (
+    ECHO Une erreur est survenue
+    EXIT /B 1
+)
+ECHO Opération réussie
+EXIT /B 0
+```
+
+**Exécution avec élévation de privilèges**
+
+```batch
+@ECHO OFF
+NET SESSION >NUL 2>&1
+IF ERRORLEVEL 1 (
+    ECHO Ce script nécessite des privilèges administrateur
+    ECHO Relancement avec élévation...
+    PowerShell -Command "Start-Process '%~dpnx0' -Verb RunAs"
+    EXIT /B
+)
+ECHO Script exécuté en tant qu'administrateur
+```
+
+**Manipulation de dates**
+
+```batch
+@ECHO OFF
+FOR /F "tokens=1-4 delims=/ " %%a IN ('DATE /T') DO (
+    SET jour=%%a
+    SET mois=%%b
+    SET annee=%%c
+)
+SET datestamp=%jour%-%mois%-%annee%
+ECHO Date actuelle: %datestamp%
+```

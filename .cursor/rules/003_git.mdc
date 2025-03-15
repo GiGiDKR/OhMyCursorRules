@@ -1,0 +1,161 @@
+---
+description: Règles et bonnes pratiques pour la gestion de projets avec Git
+globs: 
+alwaysApply: false
+---
+---
+description: Règles et bonnes pratiques pour la gestion de projets avec Git
+globs: **/*.git, **/README.md, **/.gitignore,.*git
+alwaysApply: false
+---
+
+# Gestion de projets avec Git
+
+@context {
+  "type": "documentation",
+  "purpose": "version_control",
+  "tool": "git",
+  "version": "1.0.0"
+}
+
+## Initialisation et configuration
+
+@commands {
+  "initialiser": "git init [nom-du-projet]",
+  "initialiser_dossier_courant": "git init",
+  "configurer_nom": "git config --global user.name \"Votre Nom\"",
+  "configurer_email": "git config --global user.email \"vous@example.com\"",
+  "configurer_couleurs": "git config --global color.ui auto"
+}
+
+## Gestion de base
+
+@commands {
+  "état_actuel": "git status",
+  "ajouter_fichier": "git add [fichier]",
+  "ajouter_tous": "git add .",
+  "commit": "git commit -m \"Description claire du changement\"",
+  "historique": "git log",
+  "différences": "git diff",
+  "supprimer_fichier": "git rm [fichier]",
+  "renommer_fichier": "git mv [ancien-nom] [nouveau-nom]"
+}
+
+## Branches et navigation
+
+@commands {
+  "lister_branches": "git branch",
+  "créer_branche": "git branch [nom-branche]",
+  "changer_branche": "git checkout [nom-branche]",
+  "créer_et_changer": "git checkout -b [nom-branche]",
+  "supprimer_branche": "git branch -d [nom-branche]",
+  "naviguer_commit": "git checkout [hash-commit]"
+}
+
+## Collaboration et synchronisation
+
+@commands {
+  "récupérer_et_fusionner": "git pull",
+  "récupérer_branche": "git pull origin [nom-branche]",
+  "envoyer_modifications": "git push",
+  "envoyer_branche": "git push origin [nom-branche]",
+  "envoyer_nouvelle_branche": "git push -u origin [nom-branche]",
+  "envoyer_tous": "git push --all",
+  "envoyer_tags": "git push --tags"
+}
+
+## Fusion et intégration
+
+@commands {
+  "fusionner": "git merge [branche-source]",
+  "appliquer_commit": "git cherry-pick [hash-commit]",
+  "réorganiser_commits": "git rebase [branche-cible]",
+  "rébase_interactif": "git rebase -i [branche-cible]",
+  "continuer_rébase": "git rebase --continue",
+  "abandonner_rébase": "git rebase --abort"
+}
+
+## Tags et versions
+
+@commands {
+  "créer_tag": "git tag [nom-tag]",
+  "créer_tag_annoté": "git tag -a [nom-tag] -m \"Description du tag\"",
+  "lister_tags": "git tag",
+  "supprimer_tag": "git tag -d [nom-tag]"
+}
+
+## Recherche et débogage
+
+@commands {
+  "rechercher_bug": "git bisect start",
+  "marquer_bon": "git bisect good",
+  "marquer_mauvais": "git bisect bad",
+  "terminer_recherche": "git bisect reset",
+  "blâmer_ligne": "git blame [fichier]"
+}
+
+## Workflow recommandé
+
+@workflow {
+  "nouveau_projet": [
+    "git init",
+    "git config --global user.name \"Votre Nom\"",
+    "git config --global user.email \"vous@example.com\"",
+    "touch .gitignore",
+    "git add .",
+    "git commit -m \"Initialisation du projet\""
+  ],
+  "nouvelle_fonctionnalité": [
+    "git checkout -b feature/nouvelle-fonctionnalité",
+    "# Développement de la fonctionnalité",
+    "git add [fichiers-modifiés]",
+    "git commit -m \"Description de la fonctionnalité\"",
+    "git push -u origin feature/nouvelle-fonctionnalité"
+  ],
+  "résolution_bug": [
+    "git checkout -b bugfix/problème-123",
+    "# Correction du bug",
+    "git add [fichiers-corrigés]",
+    "git commit -m \"Correction du bug #123\"",
+    "git push -u origin bugfix/problème-123"
+  ],
+  "fusion_vers_main": [
+    "git checkout main",
+    "git pull",
+    "git merge feature/nouvelle-fonctionnalité",
+    "git push"
+  ]
+}
+
+## Bonnes pratiques
+
+@best_practices [
+  {
+    "id": "commits_petits",
+    "description": "Faire des commits petits et ciblés qui représentent une unité logique de changement"
+  },
+  {
+    "id": "messages_clairs",
+    "description": "Écrire des messages de commit clairs et descriptifs qui expliquent le 'pourquoi' du changement"
+  },
+  {
+    "id": "branches_fonctionnalités",
+    "description": "Créer une branche distincte pour chaque nouvelle fonctionnalité ou correction de bug"
+  },
+  {
+    "id": "gitignore",
+    "description": "Maintenir un fichier .gitignore à jour pour éviter de committer des fichiers inutiles ou sensibles"
+  },
+  {
+    "id": "synchronisation",
+    "description": "Pull régulièrement pour rester à jour avec les changements des autres contributeurs"
+  },
+  {
+    "id": "révision_avant_commit",
+    "description": "Utiliser git diff avant de committer pour vérifier les modifications"
+  },
+  {
+    "id": "branche_propre",
+    "description": "Nettoyer régulièrement les branches fusionnées pour maintenir le dépôt organisé"
+  }
+]

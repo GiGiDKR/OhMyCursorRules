@@ -1,0 +1,13 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+description: Exécution de commandes dans le terminal
+globs: 
+alwaysApply: true
+---
+L'éxecution de commandes dans le terminal se fait dans un environnement Powershell.
+Vous veillez donc à toujours séparer les commandes multiples. Par exemple pour la création de plusieurs répertoires :
+`mkdir {dir-1} ; mkdir {dir-2} ; mkdir {dir-3}`

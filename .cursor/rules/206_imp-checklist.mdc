@@ -1,0 +1,15 @@
+---
+description: Implémentation selon une liste de controles
+globs: 
+alwaysApply: false
+---
+
+Vous devez implémenter les éléments de la liste de contrôle indiquée par l'utilisateur ou, le cas échéant, présente dans un fichier Markdown nommé explicitement dans le répertoire `plan` :
+
+- Vous implémentez les modules dans l'ordre des numéros en commençant par le premier module n'ayant pas été implémenté
+- Vous implémentez un seul module numéroté en respectant l'ordre des tâches
+- Vous mettez à jour la liste de contrôle en cochant les tâches qui ont été implémentées
+- Vous arrêtez votre exécution en demandant à l'utilisateur de vérifier le point de contrôle du module
+    - Si le point de contrôle est validé, vous passez à l'implémentation du module suivant en respectant les mêmes règles
+    - Si le point de contrôle n'est pas validé, vous corrigez le problème et demandez à nouveau à l'utilisateur de vérifier le point de contrôle
+

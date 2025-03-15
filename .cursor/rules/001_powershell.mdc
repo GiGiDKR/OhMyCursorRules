@@ -1,0 +1,239 @@
+---
+description: Règles et bonnes pratiques pour l'utilisation de PowerShell
+globs: 
+alwaysApply: false
+---
+---
+description: Règles et bonnes pratiques pour l'utilisation de PowerShell
+globs: **/*.ps1,**/*.psm1, **/*.psd1,*.ps1
+alwaysApply: false
+---
+
+# PowerShell - Bonnes pratiques et commandes essentielles
+
+@context {
+  "type": "documentation",
+  "purpose": "scripting_guidelines",
+  "tool": "powershell",
+  "version": "1.0.0"
+}
+
+## Structure et formatage de code
+
+@best_practices [
+  {
+    "id": "cmdlet_binding",
+    "description": "Toujours commencer avec [CmdletBinding()] pour vos scripts et fonctions"
+  },
+  {
+    "id": "structure_code",
+    "description": "Préférer l'ordre: param(), begin, process, end pour clarifier l'intention du script"
+  },
+  {
+    "id": "indentation",
+    "description": "Utiliser 4 espaces par niveau d'indentation"
+  },
+  {
+    "id": "longueur_ligne",
+    "description": "Limiter les lignes à 115 caractères quand possible"
+  },
+  {
+    "id": "regions",
+    "description": "Utiliser des régions (#region, #endregion) pour regrouper les blocs de code connexes"
+  },
+  {
+    "id": "requires",
+    "description": "Utiliser #Requires au début du script pour spécifier la version minimale de PowerShell ou les modules nécessaires"
+  }
+]
+
+## Conventions de nommage
+
+@best_practices [
+  {
+    "id": "noms_variables",
+    "description": "Utiliser des noms significatifs pour les variables ($userList, $serverStatus) au lieu de noms courts comme $x"
+  },
+  {
+    "id": "camel_case",
+    "description": "Utiliser camelCase pour les variables ($userCount)"
+  },
+  {
+    "id": "pascal_case",
+    "description": "Utiliser PascalCase pour les fonctions (Get-UserList)"
+  },
+  {
+    "id": "screaming_snake",
+    "description": "Utiliser SCREAMING_SNAKE_CASE pour les constantes ($MAX_RETRY_LIMIT)"
+  },
+  {
+    "id": "verbes_approuvés",
+    "description": "Commencer les noms de fonctions par un verbe approuvé (Get, Set, Start, etc.)"
+  }
+]
+
+## Commandes système et processus
+
+@commands {
+  "list_process": "Get-Process",
+  "arrêt_process": "Stop-Process -Name [nom] -Force",
+  "list_services": "Get-Service",
+  "démarrer_service": "Start-Service -Name [nom]",
+  "arrêter_service": "Stop-Service -Name [nom]",
+  "redémarrer_ordinateur": "Restart-Computer",
+  "checkpoint_ordinateur": "Checkpoint-Computer",
+  "débogage_processus": "Debug-Process -Name [processus]",
+  "obtenir_événements": "Get-WinEvent -LogName [nom_journal]"
+}
+
+## Gestion de fichiers et répertoires
+
+@commands {
+  "lister_fichiers": "Get-ChildItem -Path [chemin]",
+  "obtenir_contenu": "Get-Content -Path [fichier]",
+  "créer_fichier": "New-Item -Path [chemin] -ItemType File",
+  "créer_dossier": "New-Item -Path [chemin] -ItemType Directory",
+  "copier_fichier": "Copy-Item -Path [source] -Destination [destination]",
+  "déplacer_fichier": "Move-Item -Path [source] -Destination [destination]",
+  "supprimer_fichier": "Remove-Item -Path [fichier]",
+  "renommer_fichier": "Rename-Item -Path [ancien] -NewName [nouveau]",
+  "effacer_contenu": "Clear-Content -Path [fichier]"
+}
+
+## Commandes réseau
+
+@commands {
+  "test_connexion": "Test-NetConnection -ComputerName [hôte] -Port [port]",
+  "obtenir_ip": "Get-NetIPAddress -AddressFamily IPv4",
+  "résoudre_dns": "Resolve-DnsName -Name [nom]",
+  "liste_adaptateurs": "Get-NetAdapter"
+}
+
+## Commandes d'aide et exploration
+
+@commands {
+  "aide_commande": "Get-Help [commande] -Examples",
+  "liste_commandes": "Get-Command -Verb [verbe] -Noun [nom]",
+  "explorer_propriétés": "Get-Member -InputObject [objet]",
+  "historique_commandes": "Get-History",
+  "trouver_commandes_avec_paramètre": "Get-Help * -Parameter [paramètre]"
+}
+
+## Formatage et export
+
+@commands {
+  "format_tableau": "Format-Table -Property [propriété1],[propriété2]",
+  "format_liste": "Format-List -Property [propriété1],[propriété2]",
+  "exporter_csv": "Export-Csv -Path [fichier.csv] -NoTypeInformation",
+  "sortie_fichier": "Out-File -FilePath [chemin] -Append",
+  "barre_progression": "Write-Progress -Activity [activité] -Status [statut] -PercentComplete [pourcentage]"
+}
+
+## Gestion des erreurs
+
+@best_practices [
+  {
+    "id": "try_catch",
+    "description": "Utiliser Try/Catch/Finally pour gérer les erreurs"
+  },
+  {
+    "id": "verbose",
+    "description": "Utiliser Write-Verbose pour des messages informatifs qui s'affichent avec -Verbose"
+  },
+  {
+    "id": "debug",
+    "description": "Utiliser Write-Debug pour des messages de diagnostic qui s'affichent avec -Debug"
+  }
+]
+
+@code_examples {
+  "gestion_erreurs": [
+    "Try {",
+    "    # Code pouvant générer une erreur",
+    "    $result = Invoke-SomeRiskyCommand",
+    "} Catch {",
+    "    Write-Error \"Une erreur s'est produite: $_\"",
+    "} Finally {",
+    "    # Ce code s'exécute toujours",
+    "    Write-Verbose \"Opération terminée\"",
+    "}"
+  ]
+}
+
+## Fonctionnalités avancées
+
+@commands {
+  "filtrer_objets": "Where-Object { $_.Propriété -eq 'Valeur' }",
+  "sélectionner_propriétés": "Select-Object -Property [propriété1], [propriété2]",
+  "boucle_objets": "ForEach-Object { $_.SomeMéthode() }",
+  "attendre_tâche": "Wait-Job -Name [nom_tâche]",
+  "requête_web": "Invoke-WebRequest -Uri [url]"
+}
+
+## Modèle de base pour un script PowerShell
+
+@code_examples {
+  "template_script": [
+    "#Requires -Version 5.1",
+    "#Requires -Modules @{ ModuleName='Nom-Module'; ModuleVersion='1.0.0' }",
+    "",
+    "<#",
+    ".SYNOPSIS",
+    "    Description courte du script",
+    ".DESCRIPTION",
+    "    Description détaillée du script",
+    ".PARAMETER Param1",
+    "    Description du paramètre 1",
+    ".EXAMPLE",
+    "    ./MonScript.ps1 -Param1 Valeur",
+    "#>",
+    "",
+    "[CmdletBinding()]",
+    "param (",
+    "    [Parameter(Mandatory=$true)]",
+    "    [string]$Param1",
+    ")",
+    "",
+    "begin {",
+    "    Write-Verbose \"Initialisation...\"",
+    "}",
+    "",
+    "process {",
+    "    Try {",
+    "        # Traitement principal",
+    "        Write-Output \"Traitement de $Param1\"",
+    "    } Catch {",
+    "        Write-Error \"Erreur: $_\"",
+    "    }",
+    "}",
+    "",
+    "end {",
+    "    Write-Verbose \"Terminé.\"",
+    "}"
+  ]
+}
+
+## Raccourcis clavier et astuces
+
+@tips [
+  {
+    "id": "tab_completion",
+    "description": "Utiliser la touche Tab pour compléter automatiquement les commandes, paramètres et chemins"
+  },
+  {
+    "id": "ctrl_space",
+    "description": "Utiliser Ctrl+Space pour voir les options disponibles pour une commande ou un objet"
+  },
+  {
+    "id": "splatting",
+    "description": "Utiliser le splatting pour passer de nombreux paramètres à une commande: $params = @{Param1='valeur1'; Param2='valeur2'}; Commande @params"
+  },
+  {
+    "id": "pipes",
+    "description": "Utiliser les pipes (|) pour chaîner les commandes: Commande1 | Commande2 | Commande3"
+  },
+  {
+    "id": "risk_mitigation",
+    "description": "Utiliser -WhatIf et -Confirm pour tester des commandes destructives avant de les exécuter"
+  }
+]

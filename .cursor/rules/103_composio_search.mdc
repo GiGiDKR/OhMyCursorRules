@@ -1,0 +1,56 @@
+---
+description: MCP Server - Composio Search 
+globs: 
+alwaysApply: false
+---
+# Composio Search 
+
+## Tools
+
+### Search search  
+
+Perform A Google Search Using The Composio Google Search Api.
+
+### Search tavily search  
+
+The Composio Llm Search Class Serves As A Gateway To The Composio Llm Search Api, Allowing Users To
+
+
+### Search news search  
+The News Search Class Performs A News Specific Search Using The Composio News Search Api. This Clas
+
+### Search duck duck go search  
+
+The Duck Duck Go Search Class Utilizes The Composio Duck Duck Go Search Api To Perform Searches, Foc
+
+### Search trends search  
+
+The Trends Search Class Performs A Trend Search Using The Google Trends Search Api, To Target Trend
+
+### Search exa similarlink  
+
+Perform A Search To Find Similar Links And Retrieve A List Of Relevant Results. The Search Can Optio
+
+### Search scholar search  
+
+Scholar Api Allows You To Scrape Results From A Google Scholar Search Query. The Scholar Search Clas
+
+### Search finance search  
+
+The Finance Search Class Utilizes The Composio Finance Search Api To Conduct Financial Searches, Foc
+
+### Search google maps search  
+
+The Google Maps Search Class Performs A Location Specific Search Using The Composio Goolge Maps Sear
+
+### Search image search  
+
+The Image Search Class Performs An Image Search Using The Composio Image Search Api, To Target Image
+
+### Search event search  
+
+The Event Search Class Enables Scraping Of Google Events Search Queries. It Conducts An Event Search
+
+### Search shopping search  
+
+The Shopping Search Class Performs A Product Search Using The Composio Shopping Search Api.It Specif
